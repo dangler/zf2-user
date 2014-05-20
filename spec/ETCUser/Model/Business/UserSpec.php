@@ -6,12 +6,12 @@
  * Time: 9:30 PM
  */
 
-namespace spec\ETCUser\Model;
+namespace spec\ETCUser\Model\Business;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use ETCUser\Model\Role as Role;
-use ETCUser\Model\Context as Context;
+use ETCUser\Model\Business\Role as Role;
+use ETCUser\Model\Business\Context as Context;
 
 class UserSpec extends ObjectBehavior
 {
@@ -22,10 +22,10 @@ class UserSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('ETCUser\Model\User');
+        $this->shouldHaveType('ETCUser\Model\Business\User');
     }
 
-    function it_can_add_roles(Role $role)
+    function it_can_add_roles(\ETCUser\Model\Business\Role $role)
     {
         // add a role
         $role->getId()->willReturn(0);
@@ -43,7 +43,7 @@ class UserSpec extends ObjectBehavior
 
     }
 
-    function it_can_check_for_role(Role $role)
+    function it_can_check_for_role(\ETCUser\Model\Business\Role $role)
     {
         $role->getName()->willReturn('Test');
         $role->getId()->willReturn(0);
@@ -52,7 +52,7 @@ class UserSpec extends ObjectBehavior
         $this->hasRole($role)->shouldReturn(true);
     }
 
-    function it_can_check_for_role_and_context(Role $role, Context $context)
+    function it_can_check_for_role_and_context(Role $role, \ETCUser\Model\Business\Context $context)
     {
         $role->getName()->willReturn('TestRole');
         $role->getId()->willReturn(0);
@@ -61,6 +61,11 @@ class UserSpec extends ObjectBehavior
 
         $this->addRole($role);
         $this->hasRoleForContext($role, $context)->shouldReturn(true);
+    }
+
+    function it_can_return_full_name()
+    {
+        $this->getName()->shouldReturn('First M Last');
     }
 
 }

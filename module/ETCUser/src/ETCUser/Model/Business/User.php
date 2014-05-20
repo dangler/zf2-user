@@ -6,9 +6,10 @@
  * Time: 9:23 PM
  */
 
-namespace ETCUser\Model;
+namespace ETCUser\Model\Business;
 
-use ETCUser\Model\Role as Role;
+use ETCUser\Model\Business\Context;
+use ETCUser\Model\Business\Role as Role;
 
 
 class User
@@ -41,12 +42,10 @@ class User
     /**
      * @param int $id
      * @param $firstName
-     * @param $lastName
      * @param $middleName
-     * @param array $roles
-     * @internal param string $name
+     * @param $lastName
      */
-    function __construct($id, $firstName, $lastName, $middleName)
+    function __construct($id, $firstName, $middleName, $lastName)
     {
         $this->id = $id;
         $this->firstName = $firstName;

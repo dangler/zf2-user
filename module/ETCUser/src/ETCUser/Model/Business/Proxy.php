@@ -6,10 +6,11 @@
  * Time: 8:33 PM
  */
 
-namespace ETCUser\Model;
+namespace ETCUser\Model\Business;
 
-use ETCUser\Model\Role as Role;
-use ETCUser\Model\User as User;
+use ETCUser\Model\Business\Context;
+use ETCUser\Model\Business\Role as Role;
+use ETCUser\Model\Business\User as User;
 use Exception;
 
 class Proxy extends Role
@@ -22,13 +23,12 @@ class Proxy extends Role
     /**
      * @param int $id
      * @param string $name
-     * @param User $user
      * @param Role $role
      */
-    function __construct($id, $name, User &$user, Role $role)
+    function __construct($id, $name, Role $role)
     {
         $this->role = $role;
-        parent::__construct($id, $name, $user);
+        parent::__construct($id, $name);
     }
 
     /**
@@ -53,7 +53,7 @@ class Proxy extends Role
     }
 
     /**
-     * @param \ETCUser\Model\Role $role
+     * @param \ETCUser\Model\Business\Role $role
      */
     public function setRole($role)
     {
@@ -61,7 +61,7 @@ class Proxy extends Role
     }
 
     /**
-     * @return \ETCUser\Model\Role
+     * @return \ETCUser\Model\Business\Role
      */
     public function getRole()
     {

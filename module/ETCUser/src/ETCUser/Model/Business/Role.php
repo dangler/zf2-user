@@ -6,10 +6,11 @@
  * Time: 9:57 PM
  */
 
-namespace ETCUser\Model;
+namespace ETCUser\Model\Business;
 
-use ETCUser\Model\Context as Context;
-use ETCUser\Model\User as User;
+use ETCUser\Model\Business\Context as Context;
+use ETCUser\Model\Business;
+use ETCUser\Model\Business\User as User;
 
 class Role
 {
@@ -25,30 +26,30 @@ class Role
     private $name;
 
     /**
-     * @var Context
+     * @var \ETCUser\Model\Business\Context
      */
     private $context;
 
     /**
-     * @var
+     * @var User
      */
     private $user;
 
     /**
      * @param $id
      * @param $name
-     * @param User $user
-     * @param Context $context
+     * @param \ETCUser\Model\Business\Context $context
      */
-    function __construct($id, $name, User &$user, Context $context = null)
+    function __construct($id, $name, Business\Context $context = null)
     {
         $this->id = $id;
         $this->name = $name;
         $this->context = $context;
+        $this->user = null;
     }
 
     /**
-     * @param \ETCUser\Model\Context $context
+     * @param \ETCUser\Model\Business\Context $context
      */
     public function setContext($context)
     {
@@ -56,7 +57,7 @@ class Role
     }
 
     /**
-     * @return \ETCUser\Model\Context
+     * @return \ETCUser\Model\Business\Context
      */
     public function getContext()
     {
@@ -88,16 +89,40 @@ class Role
     }
 
     /**
+     * @param &User $user
+     */
+    public function setUser(&$user)
+    {
+        $this->user = $user;
+    }
+
+    /**
+     * @return Use
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
      * Returns a string that describe the role with context.
      *
      * @return string
      */
     public function getDescription()
     {
-        if ($this->getContext() === null){
-            return $this->getName();
+        $description = '';
+
+        if ($this->getUser() !== null ) {
+            $description .= $this->getUser()->getName() . ' as ';
         }
 
-        return $this->name . ' in ' . $this->getContext()->getName();
+        $description .= $this->getName();
+
+        if ($this->getContext() !== null) {
+            $description .= ' in ' . $this->getContext()->getName();
+        }
+
+        return $description;
     }
 } 

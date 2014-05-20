@@ -6,7 +6,7 @@
  * Time: 10:04 PM
  */
 
-namespace spec\ETCUser\Model;
+namespace spec\ETCUser\Model\Business;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -20,6 +20,6 @@ class ContextSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('ETCUser\Model\Context');
+        $this->shouldHaveType('ETCUser\Model\Business\Context');
     }
 }

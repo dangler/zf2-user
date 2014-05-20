@@ -6,7 +6,7 @@
  * Time: 9:57 PM
  */
 
-namespace ETCUser\Model;
+namespace ETCUser\Model\Business;
 
 
 class Context

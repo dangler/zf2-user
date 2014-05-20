@@ -6,25 +6,25 @@
  * Time: 9:57 PM
  */
 
-namespace spec\ETCUser\Model;
+namespace spec\ETCUser\Model\Business;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use ETCUser\Model\Context;
-use ETCUser\Model\Role;
-use ETCUser\Model\User;
+use ETCUser\Model\Business\Context;
+use ETCUser\Model\Business\Role;
+use ETCUser\Model\Business\User;
 
 class ProxySpec extends ObjectBehavior
 {
-    function let(User $user, Role $role)
+    function let(\ETCUser\Model\Business\Role $role)
     {
         $role->getName()->willReturn('TestRole');
-        $this->beConstructedWith('0', 'TestProxy', &$user, $role );
+        $this->beConstructedWith('0', 'TestProxy', $role );
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('ETCUser\Model\Proxy');
+        $this->shouldHaveType('ETCUser\Model\Business\Proxy');
     }
 
     function it_can_not_set_context(Context $context)
