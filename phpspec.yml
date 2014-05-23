@@ -1,0 +1,6 @@
+suites:
+    etc_user_suite:
+        namespace:    EtcUser
+        spec_prefix:    spec
+        src_path:       'module\EtcUser\src'
+        spec_path:      'module\EtcUser'
