@@ -22,10 +22,10 @@ class RoleSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('EtcUser\Model\Business\Role');
+        $this->shouldHaveType('EtcUser\Entity\Role');
     }
 
-    function it_can_set_context(\EtcUser\Entity\Context $context)
+    function it_can_set_context(Context $context)
     {
         $this->setContext($context);
         $this->getContext()->shouldReturn($context);

@@ -17,15 +17,15 @@ class UserSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(0, 'First', 'Middle', 'Last');
+        $this->beConstructedWith(0, 'First', 'Middle', 'Last', 'last');
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('EtcUser\Model\Business\User');
+        $this->shouldHaveType('EtcUser\Entity\User');
     }
 
-    function it_can_add_roles(\EtcUser\Entity\Role $role)
+    function it_can_add_roles(Role $role)
     {
         // add a role
         $role->getId()->willReturn(0);
@@ -43,7 +43,7 @@ class UserSpec extends ObjectBehavior
 
     }
 
-    function it_can_check_for_role(\ETCUser\Model\Business\Role $role)
+    function it_can_check_for_role(Role $role)
     {
         $role->getName()->willReturn('Test');
         $role->getId()->willReturn(0);
@@ -52,7 +52,7 @@ class UserSpec extends ObjectBehavior
         $this->hasRole($role)->shouldReturn(true);
     }
 
-    function it_can_check_for_role_and_context(Role $role, \ETCUser\Model\Business\Context $context)
+    function it_can_check_for_role_and_context(Role $role, Context $context)
     {
         $role->getName()->willReturn('TestRole');
         $role->getId()->willReturn(0);
@@ -66,6 +66,11 @@ class UserSpec extends ObjectBehavior
     function it_can_return_full_name()
     {
         $this->getName()->shouldReturn('First M Last');
+    }
+
+    function it_will_not_allow_bad_emails()
+    {
+        $this->shouldThrow('Exception')->duringAddEmail('bademail');
     }
 
 }

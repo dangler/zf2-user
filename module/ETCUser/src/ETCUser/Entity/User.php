@@ -6,11 +6,11 @@
  * Time: 9:23 PM
  */
 
-namespace ETCUser\Model\Business;
+namespace EtcUser\Entity;
 
-use ETCUser\Model\Business\Context;
-use ETCUser\Model\Business\Role as Role;
-
+use EtcUser\Entity\Context;
+use EtcUser\Entity\Role as Role;
+use Zend\Validator\EmailAddress;
 
 class User
 {
@@ -35,6 +35,16 @@ class User
     private $lastName;
 
     /**
+     * @var string
+     */
+    private $domain;
+
+    /**
+     * @var array
+     */
+    private $emails;
+
+    /**
      * @var array[Role]
      */
     private $roles;
@@ -45,13 +55,15 @@ class User
      * @param $middleName
      * @param $lastName
      */
-    function __construct($id, $firstName, $middleName, $lastName)
+    function __construct($id, $firstName, $middleName, $lastName, $domain)
     {
         $this->id = $id;
         $this->firstName = $firstName;
         $this->middleName = $middleName;
         $this->lastName = $lastName;
+        $this->domain = $domain;
         $this->roles = array();
+        $this->emails = array();
     }
 
     /**
@@ -119,11 +131,59 @@ class User
     }
 
     /**
+     * @param string $domain
+     */
+    public function setDomain($domain)
+    {
+        $this->domain = $domain;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDomain()
+    {
+        return $this->domain;
+    }
+
+    /**
+     * @return array
+     */
+    public function getEmails()
+    {
+        return $this->emails;
+    }
+
+    /**
+     * @param string $email
+     * @throws \Exception
+     */
+    public function addEmail($email)
+    {
+        $validator = new EmailAddress();
+        if ($validator->isValid($email)) {
+            $this->emails[$email] = $email;
+        } else {
+            throw new \Exception('Invalid email');
+        }
+    }
+
+    /**
      * @return string
      */
     public function getName()
     {
-        return $this->getFirstName() . ' ' . substr($this->getMiddleName(), 0, 1) . ' ' . $this->getLastName();
+        $sep = ' ';
+
+        $name = $this->getFirstName() . $sep;
+
+        if (strlen(trim($this->getMiddleName()))) {
+            $name .= substr($this->getMiddleName(), 0, 1) . $sep;
+        }
+
+        $name .= $this->getLastName();
+
+        return $name;
     }
 
     /**

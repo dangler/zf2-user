@@ -8,8 +8,22 @@
 
 namespace EtcUser\Factory;
 
+use Zend\ServiceManager\FactoryInterface;
+use EtcUser\Mapper\UserMapper;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
-class UserMapperFactory 
+class UserMapperFactory implements FactoryInterface
 {
+    /**
+     * Create service
+     *
+     * @param ServiceLocatorInterface $serviceLocator
+     * @return mixed
+     */
+    public function createService(ServiceLocatorInterface $serviceLocator)
+    {
+        $mapper = new UserMapper();
 
-} 
+        return $mapper;
+    }
+}

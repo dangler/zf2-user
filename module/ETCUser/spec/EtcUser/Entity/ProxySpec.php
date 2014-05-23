@@ -10,13 +10,12 @@ namespace spec\EtcUser\Entity;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use EtcUser\Entity\Context;
-use EtcUser\Entity\Role;
-use EtcUser\Entity\User;
+use EtcUser\Entity\Context as Context;
+use EtcUser\Entity\Role as Role;
 
 class ProxySpec extends ObjectBehavior
 {
-    function let(\ETCUser\Model\Business\Role $role)
+    function let(Role $role)
     {
         $role->getName()->willReturn('TestRole');
         $this->beConstructedWith('0', 'TestProxy', $role );

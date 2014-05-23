@@ -1,8 +1,9 @@
 <?php
-namespace ETCUser;
+namespace EtcUser;
 
 class Module
 {
+
     public function getConfig()
     {
         return include __DIR__ . '/config/module.config.php';
@@ -16,6 +17,18 @@ class Module
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
                 ),
             ),
+        );
+    }
+
+    public function getServiceConfig()
+    {
+        return array(
+            'invokables' => array(
+                'etcuser_user_service'  => 'EtcUser\Service\User',
+            ),
+            'factories' => array(
+                'etcuser_user_mapper'   => 'EtcUser\Factory\UserMapperFactory'
+            )
         );
     }
 }

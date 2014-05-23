@@ -2,7 +2,7 @@
 return array(
     'controllers' => array(
         'invokables' => array(
-            'ETCUser\Controller\Index' => 'ETCUser\Controller\IndexController',
+            'EtcUser\Controller\Index' => 'EtcUser\Controller\IndexController',
         ),
     ),
 
@@ -17,7 +17,7 @@ return array(
                         'id'     => '[0-9]+',
                     ),
                     'defaults' => array(
-                        'controller' => 'ETCUser\Controller\Index',
+                        'controller' => 'EtcUser\Controller\Index',
                         'action'     => 'index',
                     ),
                 ),

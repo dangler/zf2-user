@@ -6,11 +6,11 @@
  * Time: 8:33 PM
  */
 
-namespace ETCUser\Model\Business;
+namespace EtcUser\Entity;
 
-use ETCUser\Model\Business\Context;
-use ETCUser\Model\Business\Role as Role;
-use ETCUser\Model\Business\User as User;
+use EtcUser\Entity\Context as Context;
+use EtcUser\Entity\Role as Role;
+use EtcUser\Entity\User as User;
 use Exception;
 
 class Proxy extends Role
@@ -37,7 +37,7 @@ class Proxy extends Role
      * @param Context $context
      * @throws Exception
      */
-    public function setContext($context)
+    public function setContext(Context $context)
     {
         throw new Exception('Not allowed to set context for proxy, assumed context is the role being proxied');
     }
@@ -53,7 +53,7 @@ class Proxy extends Role
     }
 
     /**
-     * @param \ETCUser\Model\Business\Role $role
+     * @param \EtcUser\Entity\Role $role
      */
     public function setRole($role)
     {
@@ -61,7 +61,7 @@ class Proxy extends Role
     }
 
     /**
-     * @return \ETCUser\Model\Business\Role
+     * @return \EtcUser\Entity\Role
      */
     public function getRole()
     {
@@ -77,6 +77,4 @@ class Proxy extends Role
     {
         return $this->getName() . ' as ' . $this->getRole()->getName();
     }
-
-
 } 

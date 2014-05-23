@@ -6,11 +6,10 @@
  * Time: 9:57 PM
  */
 
-namespace ETCUser\Model\Business;
+namespace EtcUser\Entity;
 
-use ETCUser\Model\Business\Context as Context;
-use ETCUser\Model\Business;
-use ETCUser\Model\Business\User as User;
+use EtcUser\Entity\Context as Context;
+use EtcUser\Entity\User as User;
 
 class Role
 {
@@ -26,7 +25,7 @@ class Role
     private $name;
 
     /**
-     * @var \ETCUser\Model\Business\Context
+     * @var \EtcUser\Entity\Context
      */
     private $context;
 
@@ -38,9 +37,9 @@ class Role
     /**
      * @param $id
      * @param $name
-     * @param \ETCUser\Model\Business\Context $context
+     * @param Context $context
      */
-    function __construct($id, $name, Business\Context $context = null)
+    function __construct($id, $name, Context $context = null)
     {
         $this->id = $id;
         $this->name = $name;
@@ -49,15 +48,16 @@ class Role
     }
 
     /**
-     * @param \ETCUser\Model\Business\Context $context
+     * @param Context $context
+     * @throws Exception
      */
-    public function setContext($context)
+    public function setContext(Context $context)
     {
         $this->context = $context;
     }
 
     /**
-     * @return \ETCUser\Model\Business\Context
+     * @return Context
      */
     public function getContext()
     {

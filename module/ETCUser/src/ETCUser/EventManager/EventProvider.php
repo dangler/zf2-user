@@ -6,7 +6,7 @@
  * Time: 9:05 AM
  */
 
-namespace spec\EtcUser\EventManager;
+namespace EtcUser\EventManager;
 use Traversable;
 use Zend\EventManager\EventManagerAwareInterface;
 use Zend\EventManager\EventManagerInterface;
