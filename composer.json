@@ -13,5 +13,10 @@
         "zendframework/zftool": "dev-master"
     },"require-dev": {
         "phpspec/phpspec": "2.0.*@dev"
+    },
+    "autoload": {
+        "psr-0": {
+            "EtcUser": "module/EtcUser/src/"
+        }
     }
 }
