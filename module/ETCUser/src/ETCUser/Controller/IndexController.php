@@ -14,7 +14,8 @@ class IndexController extends AbstractActionController
     {
         echo 'HERE';
         echo '<pre>';
-        print_r($this->getUserService()->getUserMapper()); die();
+        print_r($this->getUserService()->getUserMapper()->get('E00152611'));
+        die();
 
         return new ViewModel();
     }

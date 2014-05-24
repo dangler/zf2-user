@@ -1,1 +1,3 @@
 Move EventManager out and use the Zf-Commons ZfcBase module
+
+Look into use Hydrators

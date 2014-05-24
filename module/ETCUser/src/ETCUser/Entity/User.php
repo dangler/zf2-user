@@ -54,6 +54,7 @@ class User
      * @param $firstName
      * @param $middleName
      * @param $lastName
+     * @param $domain
      */
     function __construct($id, $firstName, $middleName, $lastName, $domain)
     {
@@ -147,6 +148,14 @@ class User
     }
 
     /**
+     * @param array $emails
+     */
+    public function setEmails($emails)
+    {
+        $this->emails = $emails;
+    }
+
+    /**
      * @return array
      */
     public function getEmails()
@@ -162,7 +171,7 @@ class User
     {
         $validator = new EmailAddress();
         if ($validator->isValid($email)) {
-            $this->emails[$email] = $email;
+            $this->emails[] = $email;
         } else {
             throw new \Exception('Invalid email');
         }
