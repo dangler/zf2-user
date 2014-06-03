@@ -12,9 +12,8 @@ class IndexController extends AbstractActionController
 
     public function indexAction()
     {
-        echo 'HERE';
         echo '<pre>';
-        print_r($this->getUserService()->getUserMapper()->get('E00152611'));
+        print_r($this->getUserService()->getUserMapper()->findById('E00152611'));
         die();
 
         return new ViewModel();

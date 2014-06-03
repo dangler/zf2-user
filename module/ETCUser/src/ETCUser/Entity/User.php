@@ -47,25 +47,7 @@ class User
     /**
      * @var array[Role]
      */
-    private $roles;
-
-    /**
-     * @param int $id
-     * @param $firstName
-     * @param $middleName
-     * @param $lastName
-     * @param $domain
-     */
-    function __construct($id, $firstName, $middleName, $lastName, $domain)
-    {
-        $this->id = $id;
-        $this->firstName = $firstName;
-        $this->middleName = $middleName;
-        $this->lastName = $lastName;
-        $this->domain = $domain;
-        $this->roles = array();
-        $this->emails = array();
-    }
+    private $roles = array();
 
     /**
      * @param int $id
@@ -204,6 +186,14 @@ class User
     }
 
     /**
+     * @param array $roles
+     */
+    public function addRoles(array $roles)
+    {
+        $this->roles = array_merge($roles, $this->roles);
+    }
+
+    /**
      * @param int $id
      */
     public function removeRole($id)
@@ -234,13 +224,13 @@ class User
 
     /**
      * @param Role $r
-     * @param Context $c
+     * @param string $c
      * @return bool
      */
-    public function hasRoleForContext(Role $r, Context $c)
+    public function hasRoleForContext(Role $r, $c)
     {
         foreach ($this->roles as $role) {
-            if ($role->getName() == $r->getName() && $role->getContext()->getName() == $c->getName())
+            if ($role->getName() == $r->getName() && $role->getContext() == $c)
                 return true;
         }
         return false;

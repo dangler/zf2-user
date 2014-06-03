@@ -8,7 +8,6 @@
 
 namespace EtcUser\Entity;
 
-use EtcUser\Entity\Context as Context;
 use EtcUser\Entity\User as User;
 
 class Role
@@ -25,7 +24,7 @@ class Role
     private $name;
 
     /**
-     * @var \EtcUser\Entity\Context
+     * @var string
      */
     private $context;
 
@@ -35,29 +34,16 @@ class Role
     private $user;
 
     /**
-     * @param $id
-     * @param $name
-     * @param Context $context
-     */
-    function __construct($id, $name, Context $context = null)
-    {
-        $this->id = $id;
-        $this->name = $name;
-        $this->context = $context;
-        $this->user = null;
-    }
-
-    /**
-     * @param Context $context
+     * @param $context
      * @throws Exception
      */
-    public function setContext(Context $context)
+    public function setContext($context)
     {
         $this->context = $context;
     }
 
     /**
-     * @return Context
+     * @return string
      */
     public function getContext()
     {
@@ -86,6 +72,14 @@ class Role
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
     }
 
     /**
@@ -120,7 +114,7 @@ class Role
         $description .= $this->getName();
 
         if ($this->getContext() !== null) {
-            $description .= ' in ' . $this->getContext()->getName();
+            $description .= ' in ' . $this->getContext();
         }
 
         return $description;

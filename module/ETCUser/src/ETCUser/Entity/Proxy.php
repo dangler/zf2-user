@@ -21,31 +21,19 @@ class Proxy extends Role
     private $role;
 
     /**
-     * @param int $id
-     * @param string $name
-     * @param Role $role
-     */
-    function __construct($id, $name, Role $role)
-    {
-        $this->role = $role;
-        parent::__construct($id, $name);
-    }
-
-    /**
      * Not allowed to set context, assumed to be context of role being proxied
      *
-     * @param Context $context
-     * @throws Exception
+     * @param string $context
      */
-    public function setContext(Context $context)
+    public function setContext($context)
     {
-        throw new Exception('Not allowed to set context for proxy, assumed context is the role being proxied');
+        return;
     }
 
     /**
      * Context is assumed to be same as role being proxied
      *
-     * @return Context
+     * @return string
      */
     public function getContext()
     {

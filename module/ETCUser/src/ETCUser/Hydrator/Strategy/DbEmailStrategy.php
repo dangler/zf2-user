@@ -8,8 +8,15 @@
 
 namespace EtcUser\Hydrator\Strategy;
 
+use Zend\Stdlib\Hydrator\Strategy\DefaultStrategy;
 
-class DbEmailStrategy 
+class DbEmailStrategy extends DefaultStrategy
 {
+    public function hydrate($value) {
+        return json_decode($value);
+    }
 
+    public function extract($value) {
+        return json_encode($value);
+    }
 } 

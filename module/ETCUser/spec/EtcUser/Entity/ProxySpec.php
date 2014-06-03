@@ -10,7 +10,6 @@ namespace spec\EtcUser\Entity;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use EtcUser\Entity\Context as Context;
 use EtcUser\Entity\Role as Role;
 
 class ProxySpec extends ObjectBehavior
@@ -26,8 +25,8 @@ class ProxySpec extends ObjectBehavior
         $this->shouldHaveType('EtcUser\Entity\Proxy');
     }
 
-    function it_can_not_set_context(Context $context)
+    function it_can_not_set_context()
     {
-        $this->shouldThrow('Exception')->duringSetContext($context);
+
     }
 }

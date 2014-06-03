@@ -10,7 +10,6 @@ namespace spec\EtcUser\Entity;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use EtcUser\Entity\Context as Context;
 use EtcUser\Entity\User as User;
 
 class RoleSpec extends ObjectBehavior
@@ -25,18 +24,17 @@ class RoleSpec extends ObjectBehavior
         $this->shouldHaveType('EtcUser\Entity\Role');
     }
 
-    function it_can_set_context(Context $context)
+    function it_can_set_context()
     {
-        $this->setContext($context);
-        $this->getContext()->shouldReturn($context);
+        $this->setContext('TestContext');
+        $this->getContext()->shouldReturn('TestContext');
     }
 
-    function it_can_return_description(Context $context, User $user)
+    function it_can_return_description(User $user)
     {
         $this->getDescription()->shouldReturn('TestRole');
 
-        $context->getName()->willReturn('TestContext');
-        $this->setContext($context);
+        $this->setContext('TestContext');
         $this->getDescription()->shouldReturn('TestRole in TestContext');
 
         /*

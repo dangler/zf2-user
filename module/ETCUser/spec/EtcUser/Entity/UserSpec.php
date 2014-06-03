@@ -11,7 +11,6 @@ namespace spec\EtcUser\Entity;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use EtcUser\Entity\Role as Role;
-use EtcUser\Entity\Context as Context;
 
 class UserSpec extends ObjectBehavior
 {
@@ -52,15 +51,14 @@ class UserSpec extends ObjectBehavior
         $this->hasRole($role)->shouldReturn(true);
     }
 
-    function it_can_check_for_role_and_context(Role $role, Context $context)
+    function it_can_check_for_role_and_context(Role $role)
     {
         $role->getName()->willReturn('TestRole');
         $role->getId()->willReturn(0);
-        $role->getContext()->willReturn($context);
-        $context->getName()->willReturn('TestContext');
+        $role->getContext()->willReturn('Context');
 
         $this->addRole($role);
-        $this->hasRoleForContext($role, $context)->shouldReturn(true);
+        $this->hasRoleForContext($role, 'Context')->shouldReturn(true);
     }
 
     function it_can_return_full_name()

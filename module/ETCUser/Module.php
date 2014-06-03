@@ -28,7 +28,8 @@ class Module
             ),
             'factories' => array(
                 // factory using abstract factory
-                'etcuser_user_mapper'   => 'EtcUser\Factory\UserMapperFactory'
+                'etcuser_user_mapper'   => 'EtcUser\Factory\UserMapperFactory',
+                'etcuser_role_mapper'   => 'EtcUser\Factory\RoleMapperFactory'
             ),
         );
     }
