@@ -10,14 +10,21 @@ namespace EtcUser\Mapper;
 
 use EtcUser\Entity\Proxy;
 use EtcUser\Entity\Role;
-use EtcUser\Hydrator\Strategy\DbEmailStrategy;
+use EtcUser\Hydrator\UserHydrator;
 use Zend\Db\Adapter\Adapter as Adapter;
-use Zend\Db\Sql as Sql;
+use Zend\Db\Sql\Sql;
 use EtcUser\Entity\User;
+use Zend\ServiceManager\ServiceManager;
+use Zend\ServiceManager\ServiceManagerAwareInterface;
 use Zend\Stdlib\Hydrator\ClassMethods;
 
-class UserMapper
+class UserMapper implements ServiceManagerAwareInterface
 {
+    /**
+     * @var ServiceManager
+     */
+    protected $serviceManager;
+
     /**
      * @var \Zend\Db\Adapter\Adapter
      */
@@ -28,6 +35,18 @@ class UserMapper
      */
     private $sql;
 
+    /**
+     * Set service manager instance
+     *
+     * @param ServiceManager $serviceManager
+     * @return User
+     */
+    public function setServiceManager(ServiceManager $serviceManager)
+    {
+        $this->serviceManager = $serviceManager;
+        return $this;
+    }
+
     public function __construct()
     {
 
@@ -36,7 +55,7 @@ class UserMapper
     public function setDbAdapter(Adapter $adapter)
     {
         $this->db = $adapter;
-        $this->sql = new Sql\Sql($this->db);
+        $this->sql = new Sql($this->db);
     }
 
     /**
@@ -69,12 +88,9 @@ SQL;
         $stmt->prepare();
         $results = $stmt->execute(array('id' => $id))->current();
 
-        // setup hydrator and add custom strategy to handle emails
-        $hydrator = new ClassMethods();
-        $hydrator->addStrategy('emails', new DbEmailStrategy());
-
         // hydrate the object
         $user = new User(); //TODO: convert to DI using service manager
+        $hydrator = new UserHydrator();
         $hydrator->hydrate($results, $user);
 
         return $user;
@@ -87,7 +103,7 @@ SQL;
     private function getUserRoles(User $user)
     {
         $roles = array();
-        $hydrator = new ClassMethods();
+        $hydrator = new UserHydrator();
 
         $sql = <<<SQL
 select id, name, context, is_proxy, proxy_role_id

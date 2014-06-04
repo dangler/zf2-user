@@ -2,13 +2,12 @@
 
 namespace EtcUser\Service;
 
-use EtcUser\EventManager\EventProvider;
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\ServiceManagerAwareInterface;
 use EtcUser\Mapper\UserMapper;
 use EtcUser\Mapper\RoleMapper;
 
-class User extends EventProvider implements ServiceManagerAwareInterface
+class User implements ServiceManagerAwareInterface
 {
     /**
      * @var ServiceManager
