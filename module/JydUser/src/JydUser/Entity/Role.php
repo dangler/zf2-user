@@ -8,34 +8,54 @@
 
 namespace JydUser\Entity;
 
-use JydUser\Entity\User as User;
+use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * Class Role
+ *
+ * @package JydUser\Entity
+ *
+ * @ORM\Entity
+ * @ORM\Table(name="role")
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="descr", type="string")
+ * @ORM\DiscriminatorMap({"role"="Role", "proxy"="Proxy"})
+ */
 class Role
 {
 
     /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue
+     *
      * @var int
      */
     private $id;
 
     /**
+     * @ORM\Column(type="string")
+     *
      * @var string
      */
     private $name;
 
     /**
+     * @ORM\Column(type="string")
+     *
      * @var string
      */
     private $context;
 
     /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="roles")
+     *
      * @var User
      */
     private $user;
 
     /**
      * @param $context
-     * @throws Exception
      */
     public function setContext($context)
     {
@@ -85,13 +105,13 @@ class Role
     /**
      * @param &User $user
      */
-    public function setUser(&$user)
+    public function setUser(User $user)
     {
         $this->user = $user;
     }
 
     /**
-     * @return Use
+     * @return User
      */
     public function getUser()
     {

@@ -8,14 +8,20 @@
 
 namespace JydUser\Entity;
 
-use JydUser\Entity\Context as Context;
-use JydUser\Entity\Role as Role;
-use JydUser\Entity\User as User;
-use Exception;
+use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * Class Proxy
+ *
+ * @package JydUser\Entity
+ *
+ * @ORM\Entity
+ */
 class Proxy extends Role
 {
     /**
+     * @ORM\OneToOne(targetEntity="Role")
+     *
      * @var Role
      */
     private $role;

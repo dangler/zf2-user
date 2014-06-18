@@ -11,8 +11,6 @@ namespace JydUser\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
-use JydUser\Entity\Context;
-use JydUser\Entity\Role as Role;
 use Zend\Validator\EmailAddress;
 
 /**
@@ -41,26 +39,36 @@ class User
     private $firstName;
 
     /**
+     * @ORM\Column(type="string")
+     *
      * @var string
      */
     private $middleName;
 
     /**
+     * @ORM\Column(type="string")
+     *
      * @var string
      */
     private $lastName;
 
     /**
+     * @ORM\Column(type="string")
+     *
      * @var string
      */
     private $domain;
 
     /**
+     * @ORM\Column(type="array")
+     *
      * @var array
      */
     private $emails;
 
     /**
+     * @ORM\OneToMany(targetEntity="Role", mappedBy="user")
+     *
      * @var ArrayCollection
      */
     private $roles;
