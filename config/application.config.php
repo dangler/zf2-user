@@ -8,7 +8,9 @@
 return array(
     'modules' => array(
         'Application',
-        'EtcUser'
+        'DoctrineModule',
+        'DoctrineORMModule',
+        'JydUser'
     ),
     'module_listener_options' => array(
         'module_paths' => array(
