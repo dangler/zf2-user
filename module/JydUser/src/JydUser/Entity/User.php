@@ -64,10 +64,10 @@ class User
      *
      * @var array
      */
-    private $emails;
+    private $emails = array();
 
     /**
-     * @ORM\OneToMany(targetEntity="Role", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Role", mappedBy="user", cascade={"persist"})
      *
      * @var ArrayCollection
      */
@@ -76,14 +76,6 @@ class User
     function __construct()
     {
         $this->roles = new ArrayCollection;
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
     }
 
     /**

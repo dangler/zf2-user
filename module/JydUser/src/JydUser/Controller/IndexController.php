@@ -4,21 +4,26 @@ namespace JydUser\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use EtcUser\Service\User as UserService;
+use JydUser\Service\User as UserService;
 
 class IndexController extends AbstractActionController
 {
+    /**
+     * @var UserService
+     */
     private $userService;
 
     public function indexAction()
     {
+        $user = $this->getUserService()->getUserForDomainAccount('dangler');
+        echo '<pre>'; print_r($user); die();
         return new ViewModel();
     }
 
     public function getUserService()
     {
         if (null === $this->userService) {
-            $this->setUserService($this->getServiceLocator()->get('etcuser_user_service'));
+            $this->setUserService($this->getServiceLocator()->get('jyduser_user_service'));
         }
         return $this->userService;
     }
