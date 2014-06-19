@@ -11,7 +11,12 @@ class User implements ServiceLocatorAwareInterface
     /**
      * @var ServiceLocatorInterface
      */
-    protected $services;
+    private $services;
+
+    /**
+     * @var EntityManager
+     */
+    private $entityManager;
 
     /**
      * Set service locator
@@ -33,15 +38,22 @@ class User implements ServiceLocatorAwareInterface
         return $this->services;
     }
 
+    public function getEntityManager()
+    {
+        if ($this->entityManager === null) {
+            $this->entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
+        }
+
+        return $this->entityManager;
+    }
+
     /**
      * @param $domain
      * @return JydUser/Entity/User
      */
     public function getUserForDomainAccount($domain)
     {
-        /** @var EntityManager $em */
-        $em = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
-        return $em->getRepository('JydUser\Entity\User')->findBy(array('domain' => $domain));
+        return $this->getEntityManager()->getRepository('JydUser\Entity\User')->findBy(array('domain' => $domain));
     }
 
     /**
@@ -50,9 +62,7 @@ class User implements ServiceLocatorAwareInterface
      */
     public function getUserForId($id)
     {
-        /** @var EntityManager $em */
-        $em = $this->getServiceLocator()->get('doctrine.entitymanager.orm.default');
-        return $em->getRepository('JydUser\Entity\User')->find($id);
+        return $this->getEntityManager()->getRepository('JydUser\Entity\User')->find($id);
     }
 
     /**
@@ -72,9 +82,10 @@ class User implements ServiceLocatorAwareInterface
         $user->setLastName($lastName);
 
         /** @var EntityManager $em */
-        $em = $this->getServiceLocator()->get('doctrine.entitymanager.orm.default');
+        $em = $this->getEntityManager();
         $em->persist($user);
+        $em->flush();
 
-        return $em->getRepository('JydUser\Entity\User')->find($id);
+        return $this->getUserForDomainAccount($domain);
     }
 }

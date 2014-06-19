@@ -15,7 +15,7 @@ class IndexController extends AbstractActionController
 
     public function indexAction()
     {
-        $user = $this->getUserService()->getUserForDomainAccount('dangler');
+        $user = $this->getUserService()->createNewUser('moore', 'Preston', 'Moore', '');
         echo '<pre>'; print_r($user); die();
         return new ViewModel();
     }
